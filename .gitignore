@@ -1,22 +1,24 @@
 # 1. On ignore tout le contenu par défaut
 *
 
-# 2. On autorise l'arborescence des dossiers...
+# 2. On autorise l'arborescence des dossiers
 !*/
 
-# 3. ... SAUF le dossier Archives qu'on exclut totalement
-Archives/
-
-# 4. On autorise les fichiers sources et le Makefile
+# 3. On autorise les fichiers sources et le Makefile
 !*.c
 !*.h
 !*.y
 !*.l
 !Makefile
 
-# 5. On autorise les fichiers de configuration et la documentation
+# 4. On autorise les fichiers de configuration et la documentation
 !.gitignore
 !README.md
 !Doxyfile
 !html/
 !html/**
+
+# 5. On re-bloque explicitement les fichiers générés par Flex/Bison
+lex.yy.c
+y.tab.c
+y.tab.h
