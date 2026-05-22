@@ -27,8 +27,11 @@ Le contrôleur embarque sa propre grammaire permettant d'orchestrer 64 objets au
 Le projet s'appuie sur un système de build classique sous environnement Linux/Unix. 
 
 ```bash
-# Compilation du projet
-make
+# Compilation du projet (client & serveur de test)
+make all
 
-# Lancement de l'interpréteur interactif
-./dme7_controller
+# Lancement du client
+./spatial-controller <adresse IP> <port>
+
+# Lancement du serveur de test (localhost, port 50528)
+./dme7-sim
