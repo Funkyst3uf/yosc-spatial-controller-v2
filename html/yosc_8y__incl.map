@@ -1,0 +1,38 @@
+<map id="yosc.y" name="yosc.y">
+<area shape="rect" id="Node000001" title="Analyseur syntaxique (Parser) pour le contrôleur spatial DME7." alt="" coords="345,5,409,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,72,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="350,33,234,81,78,149,76,144,232,76,348,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,152,167,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="359,33,165,147,162,143,356,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="192,152,267,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="367,33,253,144,249,141,363,29"/>
+<area shape="rect" id="Node000005" href="$sys_8h.html" title="En&#45;tête principal regroupant les dépendances système et les constantes OSC." alt="" coords="460,79,516,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="397,28,460,69,457,73,394,33"/>
+<area shape="rect" id="Node000016" href="$spatial_8h.html" title="Interface de gestion des trajectoires et du positionnement 3D." alt="" coords="541,79,619,104"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="410,28,535,72,534,77,409,33"/>
+<area shape="rect" id="Node000017" href="$audio_8h.html" title="Interface de contrôle des paramètres audio (Mute, Gain)." alt="" coords="643,79,714,104"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="410,24,630,76,629,81,409,29"/>
+<area shape="poly" id="edge9_Node000005_Node000002" title=" " alt="" coords="460,98,305,118,86,155,85,149,304,113,460,93"/>
+<area shape="poly" id="edge14_Node000005_Node000003" title=" " alt="" coords="460,100,181,155,180,149,459,95"/>
+<area shape="poly" id="edge10_Node000005_Node000004" title=" " alt="" coords="461,103,281,152,279,147,459,98"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="379,152,475,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="480,106,448,143,444,140,476,103"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="499,152,602,177"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="500,103,533,140,529,143,496,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="626,152,697,177"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="517,102,621,144,619,149,515,106"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="721,152,817,177"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="517,98,530,101,709,146,708,151,529,107,516,103"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="842,152,913,177"/>
+<area shape="poly" id="edge11_Node000005_Node000010" title=" " alt="" coords="517,98,530,101,612,117,677,126,829,149,828,155,676,131,611,122,529,107,516,103"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="937,152,1007,177"/>
+<area shape="poly" id="edge12_Node000005_Node000011" title=" " alt="" coords="517,98,530,101,638,119,725,126,812,133,923,149,923,154,811,139,724,132,638,124,529,107,516,104"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1031,152,1105,177"/>
+<area shape="poly" id="edge13_Node000005_Node000012" title=" " alt="" coords="517,99,530,101,665,120,772,127,880,133,1017,149,1017,154,879,138,771,132,664,126,529,107,516,104"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1129,152,1204,177"/>
+<area shape="poly" id="edge15_Node000005_Node000013" title=" " alt="" coords="517,99,530,101,617,115,692,122,820,128,950,132,1027,138,1116,149,1115,155,1026,143,950,137,820,133,691,128,616,120,529,107,516,104"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1229,152,1297,177"/>
+<area shape="poly" id="edge16_Node000005_Node000014" title=" " alt="" coords="517,99,530,101,632,116,719,124,870,127,1022,130,1111,137,1216,150,1215,155,1111,142,1022,135,870,133,719,129,631,121,529,107,516,104"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="291,152,354,177"/>
+<area shape="poly" id="edge17_Node000005_Node000015" title=" " alt="" coords="462,106,363,149,361,144,460,102"/>
+</map>

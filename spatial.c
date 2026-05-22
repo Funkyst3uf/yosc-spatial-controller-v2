@@ -1,0 +1,192 @@
+/**
+ * @file spatial.c
+ * @brief Module de spatialisation des objets et envoi des messages OSC.
+ * @author Jonathan Ntoula
+ * @date Mai 2026
+ * @details Ce module gère les algorithmes de mouvement des sources sonores dans l'espace 3D.
+ * Il assure la conversion des commandes en paquets binaires OSC pour envoi au
+ * processeur Yamaha DME7 via la bibliothèque liblo.
+ */
+
+#include "sys.h"
+#include "spatial.h"
+
+/** 
+ * @brief Table de spatialisation des 64 objets (index 1 à 64). 
+ * @details Stocke la dernière position connue de chaque objet
+ */
+Point3D objets[65];         
+
+/** 
+ * @brief Bibliothèque de positions nommées (labels). 
+ * @details Permet de stocker jusqu'à 50 coordonnées cartésiennes indexées par une étiquette textuelle.
+ */
+LabelPosition table_symboles[50]; 
+
+/** @brief Compteur du nombre de labels actuellement enregistrés dans la bibliothèque. */
+int compteur = 0;
+
+/**
+ * @brief Initialise les données de spatialisation.
+ * @details Réinitialise les coordonnées de tous les objets au centre de l'espace (0,0,0)
+ * et reset la table des étiquettes en marquant le premier caractère des noms comme nul.
+ */
+void init_tables() {  // fonction ajoutée au programme précédent
+    // Initialisation des 64 objets
+    for(int n = 0; n <= 64; n++) {
+        objets[n].x = 0.0f;
+        objets[n].y = 0.0f;
+        objets[n].z = 0.0f;
+    }
+
+    // Initialisation des 50 labels
+    for(int i = 0; i < 50; i++) {
+        table_symboles[i].nom[0] = '\0';
+        table_symboles[i].x = 0.0f;
+        table_symboles[i].y = 0.0f;
+        table_symboles[i].z = 0.0f;
+    }
+    
+    compteur = 0;
+}
+
+/**
+ * @brief Enregistre ou met à jour une position nommée dans la bibliothèque.
+ * @details Si le nom existe déjà, les coordonnées sont mises à jour. Sinon, une nouvelle entrée est créée.
+ * 
+ * @param nom Chaîne de caractères identifiant la position.
+ * @param x Coordonnée X.
+ * @param y Coordonnée Y.
+ * @param z Coordonnée Z.
+ */
+
+void set_position_label(char* nom, Point3D p) { // met à jour un label existant ...
+    for(int i=0; i < compteur; i++) {
+        if(strcmp(table_symboles[i].nom, nom) == 0) {
+            table_symboles[i].x = p.x; 
+            table_symboles[i].y = p.y; 
+            table_symboles[i].z = p.z;
+            return;
+        }
+    }
+
+    // Jusqu'à 50 labels mémorisés (au-dela : déclenche une erreur)
+    if (compteur >= 50) {
+        fprintf(stderr, "Erreur : Bibliothèque de labels pleine (max 50).\n");
+        return;
+    }
+
+    strncpy(table_symboles[compteur].nom, nom, 31); // ... sinon crée un label
+    table_symboles[compteur].nom[31] = '\0'; 
+    table_symboles[compteur].x = p.x;
+    table_symboles[compteur].y = p.y;
+    table_symboles[compteur].z = p.z;
+    compteur++;
+}
+
+/**
+ * @brief Recherche les coordonnées d'une position à partir de son étiquette.
+ * 
+ * @param nom Nom de la position recherchée.
+ * @param x Pointeur vers la variable recevant la coordonnée X.
+ * @param y Pointeur vers la variable recevant la coordonnée Y.
+ * @param z Pointeur vers la variable recevant la coordonnée Z.
+ * @return int 1 si le label est trouvé, 0 sinon.
+ */
+int get_position_by_label(char* nom, float* x, float* y, float* z) {
+    for(int i=0; i < compteur; i++) {
+        if(strcmp(table_symboles[i].nom, nom) == 0) {
+            *x = table_symboles[i].x; *y = table_symboles[i].y; *z = table_symboles[i].z;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/**
+ * @brief Envoie une commande de positionnement absolu via OSC (Téléportation).
+ * @details Encapsule les coordonnées 3D dans un message liblo, le sérialise 
+ * et l'envoie sur la socket UDP.
+ * 
+ * @param fd Descripteur de la socket UDP ouverte.
+ * @param id Identifiant de l'objet audio (1-64).
+ * @param B Structure Point3D contenant les coordonnées cibles.
+ */
+void jump_to_position(int fd, int id, Point3D B) { 
+
+    lo_message msg = lo_message_new();    // Création du message liblo
+    lo_message_add_float(msg, B.x); // ajout d'un float au message ...
+    lo_message_add_float(msg, B.y);  // ... d'un deuxieme
+    lo_message_add_float(msg, B.z);  // ... et d'un troisieme comme attendu
+
+    char path[128]; // création du chemin OSC initialement gérée par le main()
+    snprintf(path, 128, OSC_PHYSICAL_POSITION "%d", id);
+
+    size_t taille;  // taille du buffer
+    
+    // Sérialisation (fabrication du buffer binaire)
+    // alloue et remplit un buffer binaire conforme au protocole OSC
+    void *buffer = lo_message_serialise(msg, path, NULL, &taille);
+
+    // Envoi du message via la socket (fd) creee par la fonction dial()
+    if (buffer != NULL) {
+        write(fd, buffer, taille);
+        free(buffer); 
+    }
+
+    objets[id] = B; // mise à jour de la position de l'objet en mémoire
+
+    lo_message_free(msg); 
+}
+
+/**
+ * @brief Déplace un objet de manière continue par interpolation linéaire.
+ * @details Découpe la trajectoire entre A et B en une série de pas. 
+ * La fluidité est assurée par un pas fixe de 4 cm.
+* 
+ * @param fd Descripteur de la socket UDP.
+ * @param id Identifiant de l'objet (1-64).
+ * @param A Point de départ (position actuelle).
+ * @param B Point d'arrivée.
+ * @param time Durée totale du mouvement en secondes.
+ */
+void move_to_position(int fd, int id, Point3D A, Point3D B, float time) { 
+
+    float step_size = 0.04;   // fixe la largeur du pas (ici, 4 cm pour une grande fluidité)
+
+    // calcul des deltas et de la distance totale
+    float dx = B.x - A.x;
+    float dy = B.y - A.y;
+    float dz = B.z - A.z;
+
+    // calcul de la distance globale totale 
+    float total_dist = sqrt(dx*dx + dy*dy + dz*dz);
+
+    if (total_dist < 0.001) return; 
+
+    // calcul du nombre de pas nécessaire en fonction de la distance
+    int total_steps = (int)(total_dist / step_size);
+    if (total_steps < 1) total_steps = 1; 
+
+    // Calcul du délai entre chaque itération
+    float delay_sec = time / total_steps; // x seconde pour faire Y pas
+    long delay_usec = (long)(delay_sec * 1000000); // conversion en microseconde pour usleep
+
+    Point3D gps;   // pour les coordonnées de transition entre A et B
+
+    // envoi des coordonnées intermediaires en boucle à jump_to_position()
+    // sur x nombre de pas (step)
+    for (int i = 0; i <= total_steps; i++) {
+        // t = facteur commun pour chaque composante des coordonnées 
+        float t = (float)i / (float)total_steps; // avec 0 <= t <= 1
+        
+        gps.x = A.x + t * dx; // chaque composante "evolue" au même rythme
+        gps.y = A.y + t * dy; 
+        gps.z = A.z + t * dz;
+
+        jump_to_position(fd, id, gps); // envoi des coordonnées intermédiares à jump()
+
+        if (i < total_steps) usleep(delay_usec); // temps d'attente entre chaque envoi
+    }
+} 
+

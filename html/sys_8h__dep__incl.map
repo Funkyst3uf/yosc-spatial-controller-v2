@@ -1,0 +1,13 @@
+<map id="sys.h" name="sys.h">
+<area shape="rect" id="Node000001" title="En&#45;tête principal regroupant les dépendances système et les constantes OSC." alt="" coords="223,5,279,31"/>
+<area shape="rect" id="Node000002" href="$audio_8c.html" title="Fonctions de traitement des paramètres audio via OSC." alt="" coords="5,79,75,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,36,75,81,73,76,208,31"/>
+<area shape="rect" id="Node000003" href="$dial_8c.html" title="Module de création et gestion de la connexion UDP." alt="" coords="99,79,157,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,40,149,81,147,76,218,35"/>
+<area shape="rect" id="Node000004" href="$dme7__simulator_8c.html" title="Serveur OSC (substitut du processeur Yamaha DME7)" alt="" coords="181,79,320,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="253,44,253,79,248,79,248,44"/>
+<area shape="rect" id="Node000005" href="$main_8c.html" title="Point d&#39;entrée du programme de contrôle du processeur immersif Yamaha DME7." alt="" coords="344,79,411,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="284,35,358,76,355,81,282,40"/>
+<area shape="rect" id="Node000006" href="$spatial_8c.html" title="Module de spatialisation des objets et envoi des messages OSC." alt="" coords="435,79,512,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="293,30,438,76,436,81,291,35"/>
+</map>

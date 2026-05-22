@@ -1,0 +1,11 @@
+<map id="yosc.l" name="yosc.l">
+<area shape="rect" id="Node000001" title="Analyseur lexical (lexer) pour le contrôleur immersif Yamaha DME7." alt="" coords="155,5,215,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,76,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,33,78,75,75,70,160,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="100,79,171,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,33,153,69,149,66,174,29"/>
+<area shape="rect" id="Node000004" href="$spatial_8h.html" title="Interface de gestion des trajectoires et du positionnement 3D." alt="" coords="195,79,273,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="195,29,220,66,216,69,191,33"/>
+<area shape="rect" id="Node000005" href="$y_8tab_8h_source.html" title=" " alt="" coords="297,79,363,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="209,28,295,70,293,75,207,33"/>
+</map>

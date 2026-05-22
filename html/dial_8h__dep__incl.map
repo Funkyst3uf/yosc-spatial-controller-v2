@@ -1,0 +1,7 @@
+<map id="dial.h" name="dial.h">
+<area shape="rect" id="Node000001" title="Interface de création et gestion de la connexion UDP." alt="" coords="47,5,106,31"/>
+<area shape="rect" id="Node000002" href="$dial_8c.html" title="Module de création et gestion de la connexion UDP." alt="" coords="5,79,63,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,44,43,80,39,77,60,41"/>
+<area shape="rect" id="Node000003" href="$main_8c.html" title="Point d&#39;entrée du programme de contrôle du processeur immersif Yamaha DME7." alt="" coords="87,79,154,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="93,41,116,77,111,80,89,44"/>
+</map>

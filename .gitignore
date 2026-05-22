@@ -1,0 +1,19 @@
+# 1. On ignore tout le contenu par défaut
+*
+
+# 2. On autorise l'arborescence des dossiers
+!*/
+
+# 3. On autorise les fichiers sources et le Makefile
+!*.c
+!*.h
+!*.y
+!*.l
+!Makefile
+
+# 4. On autorise les fichiers de configuration et la documentation
+!.gitignore
+!README.md
+!Doxyfile
+!html/
+!html/**

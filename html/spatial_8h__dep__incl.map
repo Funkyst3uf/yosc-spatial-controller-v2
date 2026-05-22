@@ -1,0 +1,9 @@
+<map id="spatial.h" name="spatial.h">
+<area shape="rect" id="Node000001" title="Interface de gestion des trajectoires et du positionnement 3D." alt="" coords="95,5,174,31"/>
+<area shape="rect" id="Node000002" href="$main_8c.html" title="Point d&#39;entrée du programme de contrôle du processeur immersif Yamaha DME7." alt="" coords="5,79,72,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,41,56,81,53,76,107,37"/>
+<area shape="rect" id="Node000003" href="$spatial_8c.html" title="Module de spatialisation des objets et envoi des messages OSC." alt="" coords="96,79,173,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="137,44,137,79,132,79,132,44"/>
+<area shape="rect" id="Node000004" href="$yosc_8l.html" title="Analyseur lexical (lexer) pour le contrôleur immersif Yamaha DME7." alt="" coords="198,79,258,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="162,37,214,76,211,81,159,41"/>
+</map>
