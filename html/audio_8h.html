@@ -75,14 +75,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Interface de contrôle des paramètres audio (Mute, Gain).  
+<p>Interface de contrôle des paramètres audio (Mute).  
 <a href="#details">More...</a></p>
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="audio_8h__dep__incl.png" border="0" usemap="#aaudio_8hdep" alt=""/></div>
 <map name="aaudio_8hdep" id="aaudio_8hdep">
-<area shape="rect" title="Interface de contrôle des paramètres audio (Mute, Gain)." alt="" coords="50,5,121,31"/>
+<area shape="rect" title="Interface de contrôle des paramètres audio (Mute)." alt="" coords="50,5,121,31"/>
 <area shape="rect" href="audio_8c.html" title="Fonctions de traitement des paramètres audio via OSC." alt="" coords="5,79,75,104"/>
 <area shape="poly" title=" " alt="" coords="73,44,50,80,45,77,68,41"/>
 <area shape="rect" href="main_8c.html" title="Point d&#39;entrée du programme de contrôle du processeur immersif Yamaha DME7." alt="" coords="99,79,165,104"/>
@@ -95,14 +95,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac331f2c70310b603198ac69dbe0b45b4" id="r_ac331f2c70310b603198ac69dbe0b45b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#ac331f2c70310b603198ac69dbe0b45b4">set_mute</a> (int <a class="el" href="main_8c.html#a6f8059414f0228f0256115e024eeed4b">fd</a>, int id, int mute)</td></tr>
-<tr class="memdesc:ac331f2c70310b603198ac69dbe0b45b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'état de muting (ON/OFF) d'un objet audio.  <br /></td></tr>
+<tr class="memdesc:ac331f2c70310b603198ac69dbe0b45b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'état de mute (ON/OFF) d'un objet audio.  <br /></td></tr>
 <tr class="separator:ac331f2c70310b603198ac69dbe0b45b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Interface de contrôle des paramètres audio (Mute, Gain). </p>
+<div class="textblock"><p>Interface de contrôle des paramètres audio (Mute). </p>
 <dl class="section author"><dt>Author</dt><dd>Jonathan Ntoula </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Mai 2026</dd></dl>
-<p>Ce fichier contient les prototypes des fonctions permettant d'agir sur les paramètres audio (notamment le Muting) des objets du moteur immersif DME7. Il assure le lien entre le parser et le module d'implémentation <a class="el" href="audio_8c.html" title="Fonctions de traitement des paramètres audio via OSC.">audio.c</a>. </p>
+<p>Ce fichier contient les prototypes des fonctions permettant d'agir sur les paramètres audio (notamment le Mute) des objets du moteur immersif DME7. Il assure le lien entre le parser et le module d'implémentation <a class="el" href="audio_8c.html" title="Fonctions de traitement des paramètres audio via OSC.">audio.c</a>. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac331f2c70310b603198ac69dbe0b45b4" name="ac331f2c70310b603198ac69dbe0b45b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac331f2c70310b603198ac69dbe0b45b4">&#9670;&#160;</a></span>set_mute()</h2>
@@ -136,7 +136,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Modifie l'état de muting (ON/OFF) d'un objet audio. </p>
+<p>Modifie l'état de mute (ON/OFF) d'un objet audio. </p>
 <p>Cette fonction construit et envoie le message OSC correspondant au paramètre de "Mute" pour un objet spécifique identifié par son ID.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Modifie l'état de muting (ON/OFF) d'un objet audio.</p>
+<p>Modifie l'état de mute (ON/OFF) d'un objet audio.</p>
 <ul>
 <li>Cette fonction construit un message OSC contenant l'état binaire souhaité, puis génère dynamiquement le chemin cible (le motif d'adresse OSC) en fonction de l'ID fourni. Le message est ensuite sérialisé en un bloc binaire et transmis au processeur via la socket UDP existante.</li>
 <li><dl class="params"><dt>Parameters</dt><dd>

@@ -87,7 +87,7 @@ Include dependency graph for audio.c:</div>
 <area shape="rect" title="Fonctions de traitement des paramètres audio via OSC." alt="" coords="703,5,772,31"/>
 <area shape="rect" href="sys_8h.html" title="En&#45;tête principal regroupant les dépendances système et les constantes OSC." alt="" coords="665,79,721,104"/>
 <area shape="poly" title=" " alt="" coords="732,32,710,68,705,66,728,30"/>
-<area shape="rect" href="audio_8h.html" title="Interface de contrôle des paramètres audio (Mute, Gain)." alt="" coords="746,79,817,104"/>
+<area shape="rect" href="audio_8h.html" title="Interface de contrôle des paramètres audio (Mute)." alt="" coords="746,79,817,104"/>
 <area shape="poly" title=" " alt="" coords="747,30,769,66,765,68,742,32"/>
 <area shape="rect" title=" " alt="" coords="5,152,101,177"/>
 <area shape="poly" title=" " alt="" coords="665,97,442,116,282,133,116,154,115,149,282,128,441,111,665,92"/>
@@ -121,14 +121,14 @@ Include dependency graph for audio.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac331f2c70310b603198ac69dbe0b45b4" id="r_ac331f2c70310b603198ac69dbe0b45b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8c.html#ac331f2c70310b603198ac69dbe0b45b4">set_mute</a> (int <a class="el" href="main_8c.html#a6f8059414f0228f0256115e024eeed4b">fd</a>, int id, int mute)</td></tr>
-<tr class="memdesc:ac331f2c70310b603198ac69dbe0b45b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active ou désactive le mode muet (Mute) d'un objet audio.  <br /></td></tr>
+<tr class="memdesc:ac331f2c70310b603198ac69dbe0b45b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active ou désactive le son (Mute) d'un objet audio.  <br /></td></tr>
 <tr class="separator:ac331f2c70310b603198ac69dbe0b45b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Fonctions de traitement des paramètres audio via OSC. </p>
 <dl class="section author"><dt>Author</dt><dd>Jonathan Ntoula </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Mai 2026</dd></dl>
-<p>Ce module contient la logique permettant de piloter l'état de diffusion (Mute ON/OFF) d'un objet audio du moteur immersif DME7. Il s'appuie sur le protocole OSC et la bibliothèque liblo pour la communication réseau. </p>
+<p>Ce module contient la logique permettant de piloter l'état de diffusion (Mute ON/OFF) d'un objet audio du moteur immersif DME7. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac331f2c70310b603198ac69dbe0b45b4" name="ac331f2c70310b603198ac69dbe0b45b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac331f2c70310b603198ac69dbe0b45b4">&#9670;&#160;</a></span>set_mute()</h2>
@@ -162,8 +162,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Active ou désactive le mode muet (Mute) d'un objet audio. </p>
-<p>Modifie l'état de muting (ON/OFF) d'un objet audio.</p>
+<p>Active ou désactive le son (Mute) d'un objet audio. </p>
+<p>Modifie l'état de mute (ON/OFF) d'un objet audio.</p>
 <ul>
 <li>Cette fonction construit un message OSC contenant l'état binaire souhaité, puis génère dynamiquement le chemin cible (le motif d'adresse OSC) en fonction de l'ID fourni. Le message est ensuite sérialisé en un bloc binaire et transmis au processeur via la socket UDP existante.</li>
 <li><dl class="params"><dt>Parameters</dt><dd>

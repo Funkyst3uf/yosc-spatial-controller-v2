@@ -6,7 +6,7 @@
 <area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="855,33,802,72,799,68,851,29"/>
 <area shape="rect" id="Node000017" href="$spatial_8h.html" title="Interface de gestion des trajectoires et du positionnement 3D." alt="" coords="829,79,907,104"/>
 <area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="871,31,871,65,865,65,865,31"/>
-<area shape="rect" id="Node000018" href="$audio_8h.html" title="Interface de contrôle des paramètres audio (Mute, Gain)." alt="" coords="931,79,1002,104"/>
+<area shape="rect" id="Node000018" href="$audio_8h.html" title="Interface de contrôle des paramètres audio (Mute)." alt="" coords="931,79,1002,104"/>
 <area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="885,29,941,68,938,73,882,33"/>
 <area shape="rect" id="Node000019" href="$y_8tab_8h_source.html" title=" " alt="" coords="1026,79,1091,104"/>
 <area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="900,28,1016,71,1014,76,898,33"/>

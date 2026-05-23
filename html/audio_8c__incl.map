@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title="Fonctions de traitement des paramètres audio via OSC." alt="" coords="703,5,772,31"/>
 <area shape="rect" id="Node000002" href="$sys_8h.html" title="En&#45;tête principal regroupant les dépendances système et les constantes OSC." alt="" coords="665,79,721,104"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="732,32,710,68,705,66,728,30"/>
-<area shape="rect" id="Node000016" href="$audio_8h.html" title="Interface de contrôle des paramètres audio (Mute, Gain)." alt="" coords="746,79,817,104"/>
+<area shape="rect" id="Node000016" href="$audio_8h.html" title="Interface de contrôle des paramètres audio (Mute)." alt="" coords="746,79,817,104"/>
 <area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="747,30,769,66,765,68,742,32"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,152,101,177"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="665,97,442,116,282,133,116,154,115,149,282,128,441,111,665,92"/>

@@ -99,10 +99,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPoint3D.html">Point3D</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Représente une coordonnée cartésienne dans l'espace tridimensionnel.  <a href="structPoint3D.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Représente des coordonnées cartésiennes dans l'espace tridimensionnel.  <a href="structPoint3D.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLabelPosition.html">LabelPosition</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure associant des coordonnées 3D à une étiquette textuelle.  <a href="structLabelPosition.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure associant des coordonnées 3D à une étiquette textuelle (label).  <a href="structLabelPosition.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -275,7 +275,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_favoris</b></td></t
   <table class="params">
     <tr><td class="paramname">fd</td><td>Descripteur de la socket UDP ouverte. </td></tr>
     <tr><td class="paramname">id</td><td>Identifiant de l'objet audio (1-64). </td></tr>
-    <tr><td class="paramname">B</td><td>Structure <a class="el" href="structPoint3D.html" title="Représente une coordonnée cartésienne dans l&#39;espace tridimensionnel.">Point3D</a> contenant les coordonnées cibles. </td></tr>
+    <tr><td class="paramname">B</td><td>Structure <a class="el" href="structPoint3D.html" title="Représente des coordonnées cartésiennes dans l&#39;espace tridimensionnel.">Point3D</a> contenant les coordonnées cibles. </td></tr>
   </table>
   </dd>
 </dl>
@@ -327,7 +327,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_favoris</b></td></t
 </div><div class="memdoc">
 
 <p>Déplace un objet de manière continue entre deux points. </p>
-<p>Calcule une trajectoire rectiligne entre A et B par interpolation linéaire et envoie une série de messages OSC.</p>
+<p>Calcule une trajectoire rectiligne entre A et B par interpolation linéaire (LERP) et envoie une série de messages OSC via la fonction jump()</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fd</td><td>Descripteur de fichier de la socket UDP connectée. </td></tr>
@@ -452,7 +452,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_favoris</b></td></t
 
 <p>Bibliothèque de positions mémorisées (labels). </p>
 <p>Bibliothèque de positions mémorisées (labels).</p>
-<p>Permet de stocker jusqu'à 50 coordonnées cartésiennes indexées par une étiquette textuelle. </p>
+<p>Permet de stocker jusqu'à 50 coordonnées cartésiennes indexées par une étiquette textuelle (label). </p>
 
 </div>
 </div>

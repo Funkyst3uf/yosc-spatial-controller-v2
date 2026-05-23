@@ -96,14 +96,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a907ae5686fd5a64105f9caa29b6feadf" id="r_a907ae5686fd5a64105f9caa29b6feadf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dial_8h.html#a907ae5686fd5a64105f9caa29b6feadf">dial</a> (char *machine, char *port)</td></tr>
-<tr class="memdesc:a907ae5686fd5a64105f9caa29b6feadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Établit une connexion UDP sortante.  <br /></td></tr>
+<tr class="memdesc:a907ae5686fd5a64105f9caa29b6feadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Établit une connexion UDP.  <br /></td></tr>
 <tr class="separator:a907ae5686fd5a64105f9caa29b6feadf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface de création et gestion de la connexion UDP. </p>
 <dl class="section author"><dt>Author</dt><dd>Jonathan Ntoula </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Mai 2026</dd></dl>
-<p>Ce fichier contient le prototype de la fonction <a class="el" href="dial_8h.html#a907ae5686fd5a64105f9caa29b6feadf" title="Établit une connexion UDP sortante.">dial()</a> qui crée et gère la liaison permettant l'envoi de commandes OSC. </p>
+<p>Ce fichier contient le prototype de la fonction <a class="el" href="dial_8h.html#a907ae5686fd5a64105f9caa29b6feadf" title="Établit une connexion UDP.">dial()</a> qui crée et gère la liaison permettant l'envoi de commandes OSC. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a907ae5686fd5a64105f9caa29b6feadf" name="a907ae5686fd5a64105f9caa29b6feadf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a907ae5686fd5a64105f9caa29b6feadf">&#9670;&#160;</a></span>dial()</h2>
@@ -131,7 +131,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Établit une connexion UDP sortante. </p>
+<p>Établit une connexion UDP. </p>
 <ul>
 <li>Résout le nom d'hôte et le port, crée une socket et la connecte pour permettre des écritures simplifiées.</li>
 </ul>
@@ -143,7 +143,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int Descripteur de fichier (positif) de socket ou -1 en cas d'erreur.</dd></dl>
-<p>Établit une connexion UDP sortante.</p>
+<p>Établit une connexion UDP.</p>
 <p>Cette fonction utilise getaddrinfo() pour résoudre l'adresse, puis tente de créer une socket IPv4/UDP. Elle renvoie un descritpeur de fichier permettant l'usage de write() pour communiquer avec le serveur. </p>
 
 </div>
