@@ -1,6 +1,6 @@
 /**
  * @file spatial.c
- * @brief Module de spatialisation des objets et envoi des messages OSC.
+ * @brief Module de spatialisation des objets et envoi des messages OSC
  * @author Jonathan Ntoula
  * @date Mai 2026
  * @details Ce module gère les algorithmes de mouvement des sources sonores dans l'espace 3D.
@@ -18,8 +18,8 @@
 Point3D objets[65];         
 
 /** 
- * @brief Bibliothèque de positions nommées (labels). 
- * @details Permet de stocker jusqu'à 50 coordonnées cartésiennes indexées par une étiquette textuelle.
+ * @brief Bibliothèque de positions 
+ * @details Permet de stocker jusqu'à 50 coordonnées cartésiennes indexées par une étiquette textuelle (label).
  */
 LabelPosition table_symboles[50]; 
 
@@ -31,7 +31,7 @@ int compteur = 0;
  * @details Réinitialise les coordonnées de tous les objets au centre de l'espace (0,0,0)
  * et reset la table des étiquettes en marquant le premier caractère des noms comme nul.
  */
-void init_tables() {  // fonction ajoutée au programme précédent
+void init_tables() {  // fonction ajoutée au programme précédent (UE Réseaux)
     // Initialisation des 64 objets
     for(int n = 0; n <= 64; n++) {
         objets[n].x = 0.0f;
@@ -60,23 +60,22 @@ void init_tables() {  // fonction ajoutée au programme précédent
  * @param z Coordonnée Z.
  */
 
-void set_position_label(char* nom, Point3D p) { // met à jour un label existant ...
-    for(int i=0; i < compteur; i++) {
+void set_position_label(char* nom, Point3D p) { 
+    for(int i=0; i < compteur; i++) { // met à jour un label existant ...
         if(strcmp(table_symboles[i].nom, nom) == 0) {
             table_symboles[i].x = p.x; 
             table_symboles[i].y = p.y; 
             table_symboles[i].z = p.z;
-            return;
+            return; // si le label existe, la fonction s'arrête ici
         }
     }
 
-    // Jusqu'à 50 labels mémorisés (au-dela : déclenche une erreur)
-    if (compteur >= 50) {
+    if (compteur >= 50) {  // Jusqu'à 50 labels mémorisés (au-dela : déclenche une erreur)
         fprintf(stderr, "Erreur : Bibliothèque de labels pleine (max 50).\n");
-        return;
+        return; // si la table est pleine, la fonction s'arrête ici
     }
 
-    strncpy(table_symboles[compteur].nom, nom, 31); // ... sinon crée un label
+    strncpy(table_symboles[compteur].nom, nom, 31); // crée un label s'il n'existe pas déjà
     table_symboles[compteur].nom[31] = '\0'; 
     table_symboles[compteur].x = p.x;
     table_symboles[compteur].y = p.y;
@@ -94,17 +93,17 @@ void set_position_label(char* nom, Point3D p) { // met à jour un label existant
  * @return int 1 si le label est trouvé, 0 sinon.
  */
 int get_position_by_label(char* nom, float* x, float* y, float* z) {
-    for(int i=0; i < compteur; i++) {
-        if(strcmp(table_symboles[i].nom, nom) == 0) {
-            *x = table_symboles[i].x; *y = table_symboles[i].y; *z = table_symboles[i].z;
-            return 1;
+    for(int i=0; i < compteur; i++) { // boucle sur le nombre de labels déjà enregistrés
+        if(strcmp(table_symboles[i].nom, nom) == 0) { // label trouvé
+            *x = table_symboles[i].x; *y = table_symboles[i].y; *z = table_symboles[i].z; // écrit les positions aux adresses fournies
+            return 1; // succès
         }
     }
-    return 0;
+    return 0; // échec
 }
 
 /**
- * @brief Envoie une commande de positionnement absolu via OSC (Téléportation).
+ * @brief Envoie une commande de positionnement absolu via OSC (téléportation).
  * @details Encapsule les coordonnées 3D dans un message liblo, le sérialise 
  * et l'envoie sur la socket UDP.
  * 
@@ -116,8 +115,8 @@ void jump_to_position(int fd, int id, Point3D B) {
 
     lo_message msg = lo_message_new();    // Création du message liblo
     lo_message_add_float(msg, B.x); // ajout d'un float au message ...
-    lo_message_add_float(msg, B.y);  // ... d'un deuxieme
-    lo_message_add_float(msg, B.z);  // ... et d'un troisieme comme attendu
+    lo_message_add_float(msg, B.y);  // ... d'un deuxième
+    lo_message_add_float(msg, B.z);  // ... et d'un troisième comme attendu
 
     char path[128]; // création du chemin OSC initialement gérée par le main()
     snprintf(path, 128, OSC_PHYSICAL_POSITION "%d", id);
@@ -136,11 +135,11 @@ void jump_to_position(int fd, int id, Point3D B) {
 
     objets[id] = B; // mise à jour de la position de l'objet en mémoire
 
-    lo_message_free(msg); 
+    lo_message_free(msg); // libération de la mémoire allouee par liblo
 }
 
 /**
- * @brief Déplace un objet de manière continue par interpolation linéaire.
+ * @brief Déplace un objet de manière continue par interpolation linéaire (LERP).
  * @details Découpe la trajectoire entre A et B en une série de pas. 
  * La fluidité est assurée par un pas fixe de 4 cm.
 * 
@@ -175,12 +174,12 @@ void move_to_position(int fd, int id, Point3D A, Point3D B, float time) {
     Point3D gps;   // pour les coordonnées de transition entre A et B
 
     // envoi des coordonnées intermediaires en boucle à jump_to_position()
-    // sur x nombre de pas (step)
+    // sur n nombre de pas (step)
     for (int i = 0; i <= total_steps; i++) {
         // t = facteur commun pour chaque composante des coordonnées 
         float t = (float)i / (float)total_steps; // avec 0 <= t <= 1
         
-        gps.x = A.x + t * dx; // chaque composante "evolue" au même rythme
+        gps.x = A.x + t * dx; // chaque composante "évolue" au même rythme
         gps.y = A.y + t * dy; 
         gps.z = A.z + t * dz;
 

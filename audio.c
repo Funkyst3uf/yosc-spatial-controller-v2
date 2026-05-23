@@ -5,15 +5,14 @@
  * @date Mai 2026
  * 
  * @details Ce module contient la logique permettant de piloter l'état de diffusion
- * (Mute ON/OFF) d'un objet audio du moteur immersif DME7. Il s'appuie sur le 
- * protocole OSC et la bibliothèque liblo pour la communication réseau.
+ * (Mute ON/OFF) d'un objet audio du moteur immersif DME7. 
  */
 
 #include "sys.h"
 #include "audio.h"
 
 /**
- * @brief Active ou désactive le mode muet (Mute) d'un objet audio.
+ * @brief Active ou désactive le son (Mute) d'un objet audio.
  * * @details Cette fonction construit un message OSC contenant l'état binaire souhaité, 
  * puis génère dynamiquement le chemin cible (le motif d'adresse OSC) en fonction 
  * de l'ID fourni. Le message est ensuite sérialisé en un bloc binaire et transmis 

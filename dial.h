@@ -9,10 +9,10 @@
  */
 
 #ifndef DIAL_H  // "Si cet identifiant n'est pas encore défini..."
-#define DIAL_H  // "...alors définis-le maintenant"
+#define DIAL_H  // "... alors définis-le maintenant"
 
 /**
- * @brief Établit une connexion UDP sortante.
+ * @brief Établit une connexion UDP 
  * * Résout le nom d'hôte et le port, crée une socket et la connecte 
  * pour permettre des écritures simplifiées.
  * 

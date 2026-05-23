@@ -1,11 +1,11 @@
 /**
  * @file audio.h
- * @brief Interface de contrôle des paramètres audio (Mute, Gain).
+ * @brief Interface de contrôle des paramètres audio (Mute).
  * @author Jonathan Ntoula
  * @date Mai 2026
  * 
  * @details Ce fichier contient les prototypes des fonctions permettant d'agir sur les 
- * paramètres audio (notamment le Muting) des objets du moteur immersif DME7.
+ * paramètres audio (notamment le Mute) des objets du moteur immersif DME7.
  * Il assure le lien entre le parser et le module d'implémentation audio.c.
  */
 
@@ -13,7 +13,7 @@
 #define AUDIO_H
 
 /**
- * @brief Modifie l'état de muting (ON/OFF) d'un objet audio.
+ * @brief Modifie l'état de mute (ON/OFF) d'un objet audio.
  * 
  * @details Cette fonction construit et envoie le message OSC correspondant
  * au paramètre de "Mute" pour un objet spécifique identifié par son ID.

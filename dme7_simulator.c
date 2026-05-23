@@ -35,7 +35,7 @@ int spatial_handler(const char *path, const char *types, lo_arg **argv,
     time_t now = time(NULL); // Heure Unix : secondes écoulées depuis le 01/01/1970
 
     // On calcule l'écart entre "maintenant" et le "dernier affichage"
-    if (difftime(now, last_time) >= 1.0) { // on affiche seulement si la différence est >= 1.0 (modifiable)
+    if (difftime(now, last_time) >= 0) { // on affiche seulement si la différence est >= 1.0 (modifiable)
     
         // Affichage des informations reçues
         if (argc >= 3 && types[0] == 'f') { // si 3 valeurs de type float = coordonnées

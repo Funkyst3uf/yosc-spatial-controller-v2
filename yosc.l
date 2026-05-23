@@ -1,10 +1,10 @@
 /**
  * @file yosc.l
- * @brief Analyseur lexical (lexer) pour le contrôleur immersif Yamaha DME7.
+ * @brief Analyseur lexical (lexer) pour le contrôleur immersif Yamaha DME7
  * @author Jonathan Ntoula
  * @date Mai 2026
  * @découpe le flux de données saisi par l'utilisateur 
- * en unités textuelles identifiables via l'utilisation de RegEx
+ * en unités textuelles (mots) identifiables via l'utilisation de RegEx
  */
 
 

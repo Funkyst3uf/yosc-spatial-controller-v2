@@ -1,6 +1,6 @@
 /**
  * @file spatial.h
- * @brief Interface de gestion des trajectoires et du positionnement 3D.
+ * @brief Interface de gestion des trajectoires et du positionnement 3D
  * @author Jonathan Ntoula
  * @date Mai 2026
  *
@@ -15,7 +15,7 @@
 
 /**
  * @struct Point3D
- * @brief Représente une coordonnée cartésienne dans l'espace tridimensionnel.
+ * @brief Représente des coordonnées cartésiennes dans l'espace tridimensionnel.
  * @details Cette structure est utilisée pour définir la position des objets audio
  * dans le repère du moteur immersif.
  */
@@ -27,8 +27,8 @@ typedef struct {
 
 /**
  * @struct LabelPosition
- * @brief Structure associant des coordonnées 3D à une étiquette textuelle.
- * @details Permet de stocker des positions mémorisées (bibliothèque de favoris).
+ * @brief Structure associant des coordonnées 3D à une étiquette textuelle (label).
+ * @details Permet de stocker des positions mémorisées.
  */
 typedef struct {
     char nom[32]; /**< Nom unique identifiant la position. */
@@ -66,8 +66,8 @@ void jump_to_position(int fd, int id, Point3D B);
 
 /**
  * @brief Déplace un objet de manière continue entre deux points.
- * @details Calcule une trajectoire rectiligne entre A et B par interpolation linéaire 
- * et envoie une série de messages OSC.
+ * @details Calcule une trajectoire rectiligne entre A et B par interpolation linéaire (LERP)
+ * et envoie une série de messages OSC via la fonction jump()
  * 
  * @param fd    Descripteur de fichier de la socket UDP connectée.
  * @param id    Identifiant de l'objet audio.

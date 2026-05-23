@@ -4,8 +4,8 @@
  * @author Jonathan Ntoula
  * @date Mai 2026
  * @details 
- * ### Langage de Commande Spatiale (DSL)
- * Ce fichier implémente la grammaire permettant de piloter le moteur audio. 
+ * ### Langage de Commande Spatiale
+ * Ce fichier implémente la grammaire permettant de piloter le moteur audio DME7 
  * Voici les commandes supportées par l'interpréteur :
  * - **SET label x y z** : Associe un nom (label) à une position (coordonnées).
  * - **JUMP id x y z** (ou *label*) : Mouvement instantané (téléportation).
@@ -35,7 +35,7 @@ extern int yylex(); // Fonction d'analyse lexicale générée par Flex
 
 /**
  * @union yylval
- * @brief Valeurs sémantiques (types) des terminaux et non-terminaux.
+ * @brief Types des terminaux et non-terminaux.
  */
 %union {  // Type des valeurs attachées aux nœuds
     int i;          /**< Entier : ID des objets, états binaires, itérations */
@@ -116,11 +116,11 @@ command:
 
 /** @brief SET : Associe un nom (label) à une position (coordinates) */
 set_cmd:
-    YSET YLABEL coordinates
+    YSET YLABEL coordinates // la syntaxe
     {
-        set_position_label($2, $3);
+        set_position_label($2, $3); // l'action
         printf("Label '%s' enregistré en [%.2f, %.2f, %.2f]\n", $2, $3.x, $3.y, $3.z);
-        free($2); 
+        free($2); // libère l'espace mémoire alloué au label
     }
     ;
 
@@ -133,10 +133,10 @@ jump_cmd:
     }
     | YJUMP object_id YLABEL  // Via un label précédemment enregistré
     {    
-        float x, y, z;
-        if (get_position_by_label($3, &x, &y, &z)) {
-            Point3D p = {x, y, z};
-            jump_to_position(fd, $2, p);
+        float x, y, z; // les coordonnées
+        if (get_position_by_label($3, &x, &y, &z)) { // envoi des adresses des coordonnées
+            Point3D p = {x, y, z}; // les variables contiennent maintenant les coordonnées stockées préalablement
+            jump_to_position(fd, $2, p); // appel de la fonction spatial jump()
             printf("Action : JUMP obj %d vers label '%s'\n", $2, $3);
         } else {
             printf("Erreur : Label '%s' inconnu\n", $3);
@@ -147,17 +147,17 @@ jump_cmd:
 
 /** @brief MOVE : Déplacement continu */
 move_cmd:
-    YMOVE object_id coordinates travel_time
+    YMOVE object_id coordinates travel_time // via des coordonnées explicites
     { 
         move_to_position(fd, $2, objets[$2], $3, $4);
         printf("Action : MOVE obj %d vers [%.2f, %.2f, %.2f] en %.2fs\n", $2, $3.x, $3.y, $3.z, $4);
     }
-    | YMOVE object_id YLABEL travel_time
+    | YMOVE object_id YLABEL travel_time // via un label
     {    
         float x, y, z;
         if (get_position_by_label($3, &x, &y, &z)) {
             Point3D b = {x, y, z};
-            move_to_position(fd, $2, objets[$2], b, $4);
+            move_to_position(fd, $2, objets[$2], b, $4); // appel de la fonction spatial move()
             printf("Action : MOVE obj %d vers label '%s' (%.2fs)\n", $2, $3, $4);
         } else {
             printf("Erreur : Label '%s' inconnu\n", $3);
@@ -172,7 +172,7 @@ swap_cmd:
     {
         Point3D posA = objets[$2]; 
         Point3D posB = objets[$3]; 
-        move_to_position(fd, $2, posA, posB, $4); 
+        move_to_position(fd, $2, posA, posB, $4); // appel successif de la fonction move()
         move_to_position(fd, $3, posB, posA, $4);
         printf("Action : SWAP entre objets %d et %d (%.2fs)\n", $2, $3, $4);
     }
@@ -190,9 +190,9 @@ pong_cmd:
         }
         printf("Action : PONG terminé (%d cycles)\n", $4);
     }
-    | YPONG object_id YLABEL repeats travel_time // Via coordonnées enregistrées
+    | YPONG object_id YLABEL repeats travel_time // Via des labels
     {
-        float x, y, z; // Adresse à passer à la fonction pour traitement
+        float x, y, z; 
         if (get_position_by_label($3, &x, &y, &z)) {
             Point3D cible = {x, y, z};
             Point3D start = objets[$2]; // Coordonnées de départ
@@ -233,4 +233,102 @@ status_cmd:
     }
     ;
     
-/** @brief QUIT :
+/** @brief QUIT : commande permettant de quitter l'interpréteur de façon sécurisée.
+ * Cette règle met fin à l'analyse syntaxique en cours et rend la main
+ * à la fonction principale pour procéder à la fermeture de la socket UDP 
+ * et à la libération de la mémoire allouée.
+ */
+quit_cmd:
+    YQUIT {
+        printf("Fermeture du contrôleur spatial YOSC...\n");
+        YYACCEPT; /* Indique à yyparse() que l'analyse est terminée avec succès (équivalent à return 0) */
+    }
+;
+
+/** * @brief Règle de commodité unifiant les entiers et les flottants.
+ * Permet à l'utilisateur de saisir "2" ou "2.0" de manière transparente.
+ */
+number:
+      YINT   { $$ = (float)$1; }
+    | YFLOAT { $$ = $1; }
+    ;
+
+/** * @brief Construction de la structure Point3D à partir de trois nombres.
+ * Capture des coordonnées cartésiennes (x, y, z).
+ */
+coordinates:
+    number number number {
+        $$.x = $1;
+        $$.y = $2;
+        $$.z = $3;
+    }
+    ;
+
+/** * @brief Validation sémantique de l'identifiant de l'objet audio.
+ * Bloque l'exécution si l'ID n'est pas dans la plage [1, 64].
+ */
+object_id:
+    YINT {
+        if ($1 < 1 || $1 > 64) {
+            fprintf(stderr, "\n[ERREUR SÉMANTIQUE] ID %d hors limites. "
+                            "Le processeur DME7 gère les objets de 1 à 64.\n", $1);
+            YYERROR; /* Interrompt la commande courante */
+        }
+        $$ = $1;
+    }
+    ;
+
+/** * @brief Capture et validation de la durée de déplacement.
+ * Bloque l'exécution si le temps est strictement négatif.
+ */
+travel_time:
+    number {
+        if ($1 < 0.0) {
+            fprintf(stderr, "\n[ERREUR SÉMANTIQUE] Le temps de trajet (%.2fs) "
+                            "doit être positif ou nul.\n", $1);
+            YYERROR;
+        }
+        $$ = $1;
+    }
+    ;
+
+/** * @brief Capture et validation du nombre de répétitions pour la commande PONG.
+ * Bloque l'exécution si le nombre de cycles est inférieur à 1.
+ */
+repeats:
+    YINT {
+        if ($1 < 1) {
+            fprintf(stderr, "\n[ERREUR SÉMANTIQUE] Le nombre de cycles (%d) "
+                            "doit être supérieur ou égal à 1.\n", $1);
+            YYERROR;
+        }
+        $$ = $1;
+    }
+    ;
+
+/** * @brief Validation sémantique de l'état binaire pour la commande MUTE.
+ * Bloque l'exécution si l'état n'est pas strictement 0 (OFF) ou 1 (ON).
+ */
+on_off:
+    YINT {
+        if ($1 != 0 && $1 != 1) {
+            fprintf(stderr, "\n[ERREUR SÉMANTIQUE] État binaire %d invalide pour MUTE. "
+                            "Attendu : 0 (OFF) ou 1 (ON).\n", $1);
+            YYERROR;
+        }
+        $$ = $1;
+    }
+    ;
+%%
+
+
+/**
+ * @brief Gestionnaire d'erreurs syntaxiques de Bison.
+ * * Cette fonction est appelée automatiquement par la fonction yyparse() 
+ * lorsqu'une entrée utilisateur ne correspond à aucune règle définie dans 
+ * notre grammaire (conflit, mot inconnu, oubli du point-virgule, etc.).
+ * * @param s Le message d'erreur généré par l'analyseur (ex: "syntax error").
+ */
+void yyerror(const char *s) {
+    fprintf(stderr, "\n[ERREUR YOSC] %s. Veuillez vérifier la syntaxe de votre commande.\n\n", s);
+}

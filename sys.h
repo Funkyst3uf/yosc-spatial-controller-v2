@@ -1,6 +1,6 @@
 /**
  * @file sys.h
- * @brief En-tête principal regroupant les dépendances système et les constantes OSC.
+ * @brief En-tête principal regroupant les dépendances système et les constantes OSC
  * @author Jonathan Ntoula
  * @date Mai 2026
  * 

@@ -1,12 +1,12 @@
 /**
  * @file main.c
- * @brief Point d'entrée du programme de contrôle du processeur immersif Yamaha DME7.
+ * @brief Point d'entrée du programme de contrôle du processeur immersif Yamaha DME7
  * @author Jonathan Ntoula
  * @date Mai 2026
  * @details Pilote le cycle de vie du programme : initialisation de la connexion réseau (dial)
  * Initialisation des structures de données du module spatial 
- * * Projet réalisé pour le cours Interprétation & Compilation, Licence Informatique Université Paris 8
- * Dirigé par M. Kislin
+ * * Projet réalisé pour le cours Interprétation & Compilation dirigé par M. Kislin
+ * Licence Informatique, Université Paris 8
  */
 
 #include "sys.h"
@@ -15,8 +15,8 @@
 #include "audio.h"
 #include "y.tab.h" /* Généré par Bison, contient les définitions de tokens */
 
-/** * @brief Descripteur de socket global.
- * @details Utilisé pour la communication UDP/OSC avec le processeur Yamaha DME7.
+/** * @brief Descripteur fichier (socket UDP)
+ * @details Utilisé pour la communication UDP avec le processeur Yamaha DME7
  */
 int fd; 
 
@@ -28,7 +28,6 @@ int yyparse();
 
 /**
  * @brief Point d'entrée du programme.
- *
  * @details Gère les arguments de la ligne de commande, établit la connexion réseau
  * et déclenche l'initialisation des tables gérées par le module spatial.
  *
