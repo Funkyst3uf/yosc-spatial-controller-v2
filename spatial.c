@@ -47,7 +47,7 @@ void init_tables() {  // fonction ajoutée au programme précédent (UE Réseaux
         table_symboles[i].z = 0.0f;
     }
     
-    compteur = 0;
+    compteur = 0; // nombre de label enregistré (mis à jour au fur et à mesure)
 }
 
 /**
