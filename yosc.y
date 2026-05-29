@@ -17,7 +17,7 @@
  * - **QUIT** : Fin de session propre.
  */
 
-/** @cond BISON_HIDDEN_PROLOGUE */
+/** @cond BISON_HIDDEN_BLOC */
 %{    
 #include <stdio.h>
 #include <string.h>
@@ -212,7 +212,7 @@ pong_cmd:
 
 /** @brief MUTE : (Dés)activation audio. État binaire (0 = OFF, 1 = ON) */
 mute_cmd:
-    YMUTE object_id on_off // La règle on_off sécurise les valeurs possibles du non-terminal
+    YMUTE object_id on_off // La règle on_off sécurise les valeurs possibles de l'état (1 = ON ; 0 = OFF)
     { 
         set_mute(fd, $2, $3);
         
